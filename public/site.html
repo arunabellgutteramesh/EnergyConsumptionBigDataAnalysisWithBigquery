@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="energyStatisticsApp" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Energy Data Statistics</title>
+
+    <!-- Styles -->
+    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/lib/helper.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="/javascript/controllers/energystatistics.js"></script>
+</head>
+
+<body ng-controller="energyStatisticsController">
+
+    <div class="header text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Energy Statistics Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+
+                <!-- /# row -->
+                <section id="main-content">
+
+                    <div class="row ">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="text-center">Top four countries by their energy consumption per category per year</h3></br></br>
+                                    <h5>Please select the desired category and year to see the consumption</h5>
+                                    <form name="topFourConsumptionPerYearForm" ng-submit="getTopFourConsumptionsPerYear()">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="categorySelect">Select a Category:</label>
+                                                <select class="form-control" id="categorySelect" ng-model="selectedCategory" ng-options="cat.Category for cat in categories">
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="yearsDropDownSelect">Select a Year:</label>
+                                                <select class="form-control" id="yearsDropDownSelect" ng-model="yearSelected" ng-options="year for year in years">
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <button type="submit" class="btn btn-primary submit-btn-style">Query</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3" ng-repeat="result in topFourConsumptionResults">
+                            <div class="card">
+                                <div class="stat-widget-two">
+                                    <div class="stat-content">
+                                        <div class="stat-text" ng-class="{ 'success-color' : $index== 0, 'primary-color' : $index==1, 'warning-color' : $index==2, 'danger-color' : $index==3}">{{result.Country}} </div>
+                                        <div class="stat-digit"> <i class="fa fa-usd"></i>{{result.Total_Quantity}}</div><small>in {{result.Unit}}</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar  w-{{result.progress}}" ng-class="{ 'progress-bar-success' : $index== 0, 'progress-bar-primary' : $index==1, 'progress-bar-warning' : $index==2, 'progress-bar-danger' : $index==3}" 
+                                        role="progressbar" aria-valuenow="{{result.progress}}" style="width:{{result.progress}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Energy Statistics Overview</h4></br></br>
+                                    <div class='tableauPlaceholder' id='viz1555417737655' style='position: relative'>
+                                        <noscript>
+                                        </noscript>
+                                        <object class='tableauViz' style='display:none;'>
+                                            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                                            <param name='embed_code_version' value='3' />
+                                            <param name='site_root' value='' />
+                                            <param name='name' value='EnergyDashboard_15554176735460&#47;Dashboard1' />
+                                            <param name='tabs' value='no' />
+                                            <param name='toolbar' value='yes' />
+                                            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;EnergyDashboard_15554176735460&#47;Dashboard1&#47;1.png' />
+                                            <param name='animate_transition' value='yes' />
+                                            <param name='display_static_image' value='yes' />
+                                            <param name='display_spinner' value='yes' />
+                                            <param name='display_overlay' value='yes' />
+                                            <param name='display_count' value='yes' />
+                                            <param name='filter' value='publish=yes' />
+                                        </object>
+                                    </div>
+                                    <script type='text/javascript'>
+                                        var divElement = document.getElementById('viz1555417737655');
+                                        var vizElement = divElement.getElementsByTagName('object')[0];
+                                        vizElement.style.width = '1120px';
+                                        vizElement.style.height = '827px';
+                                        var scriptElement = document.createElement('script');
+                                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                                        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- jquery vendor -->
+    <script src="assets/js/lib/jquery.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+
+</body>
+
+</html>
