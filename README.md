@@ -34,9 +34,9 @@ Node JS provides the middleware between Google BigQuery and front-end.
 
 Used Tableau Public for visualisation.
 
-# Front-end
+# AngularJS
 
-Used Angular JS MVC to display the front end.
+Used Angular JS MVC to display the front-end.
 
 
 
