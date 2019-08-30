@@ -38,6 +38,10 @@ Used Tableau Public for visualisation.
 
 Used Angular JS MVC to display the front-end.
 
+# Heroku
+
+Used Heroku for app deployment.
+
 
 
 
